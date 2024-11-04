@@ -1,0 +1,84 @@
+
+section.table {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    overflow: auto;
+    min-width: 1000px;
+}
+table {
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid #FF4081;
+    padding: 0;
+    height: 50px;
+    width: 100px;
+    margin: 0;
+    font-size: 20px;
+    text-align: center;
+    vertical-align: center;
+    color: #FFFF00;
+    min-width: 100px;
+    min-height: 50px;
+}
+th {
+    background-color: #282828;
+    color: #FFFF00;
+}
+tr:nth-child(even) {
+    background-color: #1C1C1C;
+}
+th::selection, td.letter::selection {
+    background-color: #FFFF00;
+    color: #121212;
+}
+input.cell {
+    text-align: center;
+    vertical-align: center;
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+    background-color: transparent;
+    border: 0;
+    color: #FF4081;
+    font-weight: 700;
+    resize: none;
+    margin: 0;
+}
+input.cell:hover {
+    background-color: rgba(256, 64, 129, 0.5);
+    opacity: 0.8;
+    border: 0;
+    color: #121212;
+    transition: background-color 0.2s, color 0.3s;
+}
+input.cell:focus {
+    outline: none; /* Убираем стандартную рамку при фокусе */
+    border-color: transparent;
+    background-color: #FF4081;
+    color: #121212;
+    transition: background-color 0.3s, color 0.3s;
+}
+input.cell::selection {
+    background-color: #121212;
+    color: #FF4081;
+}
+button.table {
+    background-color: #FF4081;
+    color: #E0E0E0;
+    font-weight: bold;
+    border: 0;
+    font-size: 25px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+button.table:hover {
+    background-color: #FFFF00;
+    color: #121212;
+    transition: background-color 0.3s, color 0.3s;
+}

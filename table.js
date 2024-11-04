@@ -20,6 +20,26 @@ function updateFirstColumn() {
     }
 }
 
+function updateMatrix() {
+    matrix.clear();
+    const letters = document.getElementsByClassName('letter'); // class letter is used in first table column
+    const rowLength = document.getElementsByTagName('th').length - 1; // by decreasing this value by 1 we exclude 'add/erase column' buttons
+    const cells = document.getElementsByClassName('cell');
+
+    let array;
+    let cellIndex = 0;
+    for (let i = 0; i < letters.length; ++i) { // walks through every row
+        //alert('/' + letters.item(i).textContent + '/');
+
+        array = new Array();
+        for (let i = 1; i < rowLength; ++i) { // walks through every cell in a row and collect an array of instructions
+            array.push(cells.item(cellIndex).value);
+            ++cellIndex;
+        }
+        matrix.set(letters.item(i).textContent, array); // bounds a letter with array of instructions
+    }
+}
+
 function addColumn() {
     const thead = document.getElementsByTagName('thead')[0];
     const tr = thead.children[0];
