@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      width: 100vw;
+      border: 0;
+      background-color: #121212;
+      color: #FF4081;
+    }
+    ::selection {
+      background-color: #FF4081;
+      color: #121212;
+    }
+    main {
+      width: 72vw;
+      min-width: 1000px;
+      margin-left: 12vw;
+      margin-right: 12vw;
+      margin-top: 7vh;
+      height: 2000px;
+      z-index: 1;
+    }
+    section {
+      z-index: 2;
+    }
+    p.lentCell {
+      display: inline-block;
+      margin: 0;
+      border-right: 1px solid #FF4081;
+      height: 25px;
+      width: 40px;
+      font-family: sans-serif;
+      text-align: center;
+      vertical-align: center;
+    }
+    #lent {
+      -ms-overflow-x: scroll;
+      width: 820px;
+      margin-top: 20px;
+      margin-bottom: 40px;
+      overflow: scroll;
+    }
+    #panel {
+      height: 35vh;
+      min-height: 300px;
+    }
+    div.panel {
+      margin-top: 3vh;
+      display: grid;
+      width: 72vw;
+      min-width: 1000px;
+      grid-template-columns: 30vw 30vw;
+      justify-content: space-evenly;
+      height: 22vh;
+      padding: 0;
+      min-height: 180px;
+    }
+    article.panel {
+      min-width: 400px;
+      margin: 0;
+    }
+    button.panel {
+      background-color: #FF4081;
+      color: #E0E0E0; /*#121212*/
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: Verdana, sans-serif;
+      font-size: 40px;
+      font-weight: normal;
+      width: 210px;
+    }
+    button.panel:hover {
+      background-color: #FFFF00;
+      color: #121212;
+    }
+    #panelButtonsHolder {
+      display: grid;
+      grid-template-columns: repeat(3, 250px);
+      justify-content: space-evenly;
+      width: 72vw;
+      min-width: 1000px;
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }
+    h3.panel {
+      display: inline-block;
+      text-align: center;
+      vertical-align: center;
+      width: 6vw;
+      min-width: 100px;
+      font-family: sans-serif;
+    }
+    section.help {
+      position: absolute;
+      top: 12vh;
+      right: 18vw;
+      width: 64vw;
+      min-width: 600px;
+      display: none;
+      z-index: 3;
+      background-color: rgba(18, 18, 18, 0.85);
+      height: 500px;
+    }
+    article.help {
+      margin-left: 40px;
+      margin-right: 40px;
+    }
+    #helpButton { /*  */
+      background: linear-gradient(270deg, #FF4500, #FF8C00, #FFD700, #FFD700, #FF8C00, #FF4500);
+      background-size: 400% 400%; /* Увеличиваем размер градиента для анимации */
+      font-size: 30px;
+      font-weight: bold;
+      font-family: sans-serif;
+      width: 48px;
+      height: 48px;
+      border-radius: 24px;
+      outline: none;
+      border: none;
+      margin-left: 200px;
+      margin-top: 10px;
+      animation: gradientAnimation 3s ease infinite; /* Анимация градиента */
+      transition: background 1s;
+    }
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    #helpButton:hover {
+      animation: gradientAnimation 1s ease infinite; /* Ускоряем анимацию при наведении */
+    }
+    ul.help {
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: repeat(5, 5fr);
+      justify-content: space-evenly;
+      list-style-type: none;
+    }
+    button.help {
+      text-align: center;
+      vertical-align: center;
+      background-color: transparent;
+      color: #FF4500;
+      font-size: 25px;
+      height: 100%;
+      width: 100%;
+      border: none;
+      transition: color 0.5s;
+    }
+    button.help:hover {
+      color: #FFFF00;
+      transition: color 0.5s;
+    }
+    li.help {
+      display: inline-block;
+    }
+    li.rules {
+      margin-top: 10px;
+    }
+    nav.help {
+      padding: 0;
+      margin: 0;
+      height: 50px;
+      width: 100%;
+    }
+    #terminal_article, #alphabet_article, #terminal_article {
+      display: none;
+    }
+    span.help.essential {
+      color: #FFFF00;
+    }
+    span.help.essential::selection {
+      color: #121212;
+      background-color: #FFFF00;
+    }
+    span.help.critical {
+      color: red;
+    }
+    span.help.critical::selection {
+      background-color: red;
+      color: #121212;
+    }
+    span.help.permitted {
+      color: limegreen;
+    }
+    span.help.permitted::selection {
+      background-color: limegreen;
+      color: #121212;
+    }
+    input.panel {
+      background-color: transparent;
+      color: #FF4081;
+      font-size: 20px;
+      border: 1px solid #FF4081;
+      padding: 10px;
+      border-radius: 5px;
+      transition: border-color 0.3s;
+    }
+    #display {
+      width: 550px;
+      height: 15vh;
+      min-height: 130px;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      background-color: transparent;
+      color: #FF4081;
+      outline: none;
+      border: 1px solid #FF4081;
+      margin: 0;
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+      font-size: 22px;
+      max-height: 22vh;
+      overflow-x: scroll;
+      -ms-overflow-x: scroll;
+    }
+    #console {
+      width: 550px;
+      height: 3vh;
+      min-height: 35px;
+      background-color: transparent;
+      color: #FF4081;
+      outline: none;
+      border: 1px solid #FF4081;
+      margin: 0;
+      padding: 10px;
+      text-align: left;
+      vertical-align: auto;
+      font-size: 25px;
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+    }
+    #console:hover {
+      border: 2px solid #FF4081;
+    }
+    #console:focus {
+      border: 1px solid #FFFF00;
+      color: #FFFF00;
+    }
+    #console:focus::selection {
+      background-color: #FFFF00;
+      color: #121212;
+    }
+    input.panel::placeholder {
+      color: rgba(256, 64, 129, 0.7);
+      font-style: italic;
+    }
+    input.panel:focus {
+      border: 1px solid #FFFF00;
+      color: #FFFF00;
+      outline: none;
+    }
+    input.panel:focus::selection {
+      background-color: #FFFF00;
+      color: #121212;
+    }
+    #console:focus::selection {
+      background-color: #FFFF00;
+      color: #121212;
+    }
+    input.panel:focus::placeholder {
+      color: rgba(255, 255, 0, 0.6);
+    }
+    section.table {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      overflow: auto;
+      min-width: 1000px;
+    }
+    table {
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #FF4081;
+      padding: 0;
+      height: 50px;
+      width: 100px;
+      margin: 0;
+      font-size: 20px;
+      text-align: center;
+      vertical-align: center;
+      color: #FFFF00;
+      min-width: 100px;
+      min-height: 50px;
+    }
+    th {
+       background-color: #282828;
+       color: #FFFF00;
+    }
+    tr:nth-child(even) {
+      background-color: #1C1C1C;
+    }
+    th::selection, td.letter::selection {
+      background-color: #FFFF00;
+      color: #121212;
+    }
+    input.cell {
+      text-align: center;
+      vertical-align: center;
+      width: 100px;
+      height: 50px;
+      font-size: 20px;
+      background-color: transparent;
+      border: 0;
+      color: #FF4081;
+      font-weight: 700;
+      resize: none;
+      margin: 0;
+    }
+    input.cell:hover {
+      background-color: rgba(256, 64, 129, 0.5);
+      opacity: 0.8;
+      border: 0;
+      color: #121212;
+      transition: background-color 0.2s, color 0.3s;
+    }
+    input.cell:focus {
+      outline: none; /* Убираем стандартную рамку при фокусе */
+      border-color: transparent;
+      background-color: #FF4081;
+      color: #121212;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    input.cell::selection {
+      background-color: #121212;
+      color: #FF4081;
+    }
+    button.table {
+      background-color: #FF4081;
+      color: #E0E0E0;
+      font-weight: bold;
+      border: 0;
+      font-size: 25px;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      text-align: center;
+      vertical-align: center;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    button.table:hover {
+      background-color: #FFFF00;
+      color: #121212;
+      transition: background-color 0.3s, color 0.3s;
+    }
+  </style>
+</head>
+<body onload="forOnload()">
+
+<main>
+
+  <section id="panel">
+    <div class="panel">
+      <article class="panel">
+        <h3 class="panel" id="labelForWord">Word</h3>
+        <input class="panel" id="word" name="word" type="text" placeholder="s4, s1, s3, s5, s2, s1">
+        <br>
+        <h3 class="panel" id="labelForAlphabet">Alphabet</h3>
+        <input class="panel" id="alphabet" type="text" placeholder="{s1, s2, s3, s4, s5}">
+        <div>
+          <button id="helpButton" onclick="help()">?</button>
+        </div>
+      </article>
+      <article class="panel">
+        <div id="display"></div>
+        <input id="console">
+      </article>
+    </div>
+    <div id="panelButtonsHolder">
+      <button onclick="build()" type="button" class="panel">Build</button>
+      <button onclick="launch()" class="panel">Launch</button>
+      <button onclick="copy()" class="panel" title="getConfigAndPushInTheClipboard">Copy</button>
+    </div>
+  </section>
+
+  <section id="lent"></section>
+
+  <section id="help" class="help">
+    <nav class="help">
+      <ul class="help">
+        <li class="help"><button class="help" onclick="">Help</button></li>
+        <li class="help"><button class="help" onclick="switchTo('terminal')">Terminal</button></li>
+        <li class="help"><button class="help" onclick="switchTo('alphabet')">Alphabet</button></li>
+        <li class="help"><button class="help" onclick="switchTo('table')">Table</button></li>
+        <li class="help"><button class="help"  onclick="exitFromHelp()">Exit</button></li>
+      </ul>
+    </nav>
+    <article id="terminal_article" class="help">
+      <h4>Terminal</h4>
+      <p class="help">You can write these simple command in terminal and see what happen afterward</p>
+      <ul>
+        <li class="rules"><span class="help critical">build ~...</span> the most valuable command this terminal was made for!
+          It supposed to turn a string-formatted machine configuration for storing, transferring and fast setting up your homework.
+          You may don't even know other commands
+        </li>
+        <li class="rules">
+          <span class="help critical">copy</span> does the same as <b>Copy</b> button. And <b>Copy</b> button
+          compiles short stringified program configuration and puts it in your clipboard
+        </li>
+        <li class="rules"><span class="help permitted">print alphabet</span> - displays the actual array of letters you provided the program.
+          It shows especially what program interpreted as your alphabet and saved in itself)<br>
+        Shorthand <span class="help permitted">print -a</span> exists
+        </li>
+        <li class="rules"><span class="help permitted">print word</span> - prints the word you specified as word.
+          Check whether my program wrote in right word or not<br>
+          Shorthand <span class="help permitted">print -w</span>
+        </li>
+        <li class="rules"><span class="help essential">build</span> commands with no arguments literally substitutes <b>Build</b> button. I mark it as potentially
+          harmful because I don't know its mechanism of work.
+        </li>
+        <li class="rules">
+          <span class="help essential">clear terminal</span> washes console, so it becomes empty<br>
+          Shorthand <span class="help essential">clear -t</span>
+        </li>
+      </ul>
+    </article>
+    <article id="alphabet_article" class="help">
+      <h4 class="help">Alphabet</h4>
+      <ul>
+        <li class="rules"><span class="help essential">#</span>, <span class="help essential">~</span>,
+          <span class="help essential">></span>, <span class="help essential"><</span>, <span class="help essential">=</span>
+          symbols and <span class="help essential">empty string</span> are <span class="help critical">forbidden</span> as letters or part of it
+        </li>
+        <li class="rules">
+          <span class="help essential">comma</span> ( <span class="help essential">,</span> ) may not be a letter or part of it
+        </li>
+        <li class="rules">
+          You should write something like <span class="help permitted">{s1, s2, s3, s4}</span>
+        </li>
+        <li class="rules">
+          If you white the next:
+          <span class="help permitted">{s1,   s 2, s3, s4, s 5,s6}</span> - it's all permitted,
+          but keep in mint that 2 of your letter will be '<span class="help critical">s 2</span>'
+          and '<span class="help critical">s 5</span>'!
+        </li>
+        <li class="rules">
+          <span class="help essential">{</span>, <span class="help essential">,</span>,
+          <span class="help essential">}</span> are <span class="help critical">mandatory</span>
+        </li>
+      </ul>
+      <br>
+      <p class="help"></p>
+    </article>
+    <article id="table_article" class="help">
+      <h4 class="help">Table</h4>
+      <p class="help"></p>
+    </article>
+    <p class="help"></p>
+  </section>
+
+  <section class="table">
+    <table id="table">
+    <thead>
+    <tr>
+      <th id="headCell">S\Q</th>
+      <th>q1</th>
+      <th>q2</th>
+      <th>q3</th>
+      <th>q4</th>
+      <th>q5</th>
+      <th>q6</th>
+      <th>q7</th>
+      <th>
+        <button class="table" onclick="eraseColumn()">-</button>
+        <button class="table" onclick="addColumn()">+</button>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td class="letter">s1</td>
+      <td><input type="text" class="cell"></td>
+      <td><input type="text" class="cell"></td>
+      <td><input type="text" class="cell"></td>
+      <td><input type="text" class="cell"></td>
+      <td><input type="text" class="cell"></td>
+      <td><input type="text" class="cell"></td>
+      <td><input type="text" class="cell"></td>
+    </tr>
+    <tr>
+      <td class="letter">s2</td>
+      <td><input type="text" class="cell"></td>
+      <td><input type="text" class="cell"></td>
+      <td><input type="text" class="cell"></td>
+      <td><input type="text" class="cell"></td>
+      <td><input type="text" class="cell"></td>
+      <td><input type="text" class="cell"></td>
+      <td><input type="text" class="cell"></td>
+    </tr>
+    <tr>
+      <td class="letter">s3</td>
+      <td><input type="text" class="cell"></td>
+      <td><input type="text" class="cell"></td>
+      <td><input type="text" class="cell"></td>
+      <td><input type="text" class="cell"></td>
+      <td><input type="text" class="cell"></td>
+      <td><input type="text" class="cell"></td>
+      <td><input type="text" class="cell"></td>
+    </tr>
+    <tr>
+      <td class="letter">s4</td>
+      <td><input type="text" class="cell"></td>
+      <td><input type="text" class="cell"></td>
+      <td><input type="text" class="cell"></td>
+      <td><input type="text" class="cell"></td>
+      <td><input type="text" class="cell"></td>
+      <td><input type="text" class="cell"></td>
+      <td><input type="text" class="cell"></td>
+    </tr>
+    <tr>
+      <td class="letter">s5</td>
+      <td><input type="text" class="cell"></td>
+      <td><input type="text" class="cell"></td>
+      <td><input type="text" class="cell"></td>
+      <td><input type="text" class="cell"></td>
+      <td><input type="text" class="cell"></td>
+      <td><input type="text" class="cell"></td>
+      <td><input type="text" class="cell"></td>
+    </tr> <!--
+    <tr id="buttonedForRow">
+      <td>
+        <button class="table" onclick="eraseRow()">-</button>
+        <button class="table" onclick="addRow()">+</button>
+      </td>
+    </tr> -->
+    </tbody>
+  </table>
+  </section>
+</main>
+<script> // globals: matrix, alphabet, word \
+
+function forOnload() {
+  prepareLent(20);
+  addLabelListeners();
+  addConsoleListener();
+}
+
+function prepareLent(quantity) {
+  quantity = parseInt(quantity);
+  const lent = document.getElementById('lent');
+  let cell;
+  for (let i = 1; i <= quantity; ++i) {
+    cell = document.createElement('p');
+    cell.setAttribute('id', `${i}`);
+    cell.setAttribute('title', `${i}`);
+    cell.classList.add('lentCell');
+    lent.appendChild(cell);
+  }
+}
+
+function addConsoleListener() {
+  const console = document.getElementById('console');
+  console.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      const display = document.getElementById('display');
+      let p = document.createElement('p');
+      p.textContent = '#' + console.value;
+      display.appendChild(p);
+      invokeCommandReader();
+    }
+  });
+}
+
+async function invokeCommandReader() {
+  await sleep(300);
+  const display = document.getElementById('display');
+  let command = display.children.item(display.children.length - 1).textContent.trim();
+  let p, message;
+  switch (command) {
+    case '#clear -t':
+    case '#clear terminal':
+      while (display.children.length !== 0) {
+        display.children.item(0).remove();
+      }
+      break;
+    case '#clear -a':
+    case '#clear alphabet':
+      let alphabetInput = document.getElementById('alphabet');
+      alphabetInput.value = '';
+      updateAlphabet();
+      break;
+    case '#clear -w':
+    case '#clear word':
+      let wordInput = document.getElementById('word');
+      wordInput.value = '';
+      updateWord();
+      break;
+    case '#print alphabet':
+    case '#print -a':
+      p = document.createElement('p');
+      updateAlphabet();
+      if (alphabet[0] === '' && alphabet.length === 1) {
+        message = 'alphabet is empty';
+        p.textContent = message;
+        display.appendChild(p);
+        break;
+      }
+      message = 'alphabet: ';
+      for (let i = 0; i < alphabet.length - 2; ++i) {
+        message = message + alphabet[i] + ', ';
+      }
+      message = message + alphabet[alphabet.length - 1];
+      p.textContent = message;
+      display.appendChild(p);
+      break;
+    case '#print word':
+    case '#print -w':
+      updateWord();
+      p = document.createElement('p');
+      if (word[0] === '' && word.length === 1) {
+        message = 'word is empty';
+        p.textContent = message;
+        display.appendChild(p);
+        break;
+      }
+      message = 'the word: ';
+      for (let i = 0; i < word.length - 2; ++i) {
+        message = message + word[i] + ', ';
+      }
+      message = message + word[word.length - 1];
+      p.textContent = message;
+      display.appendChild(p);
+      break;
+    case '#build':
+      build();
+      break;
+    case '#help':
+      help();
+      break;
+    case '#copy':
+      p = document.createElement('p');
+      p.textContent = hash()
+      display.appendChild(p);
+      navigator.clipboard.writeText(hash())
+              .then(() => {
+                console.log("Copied to the clipboard!");
+              })
+              .catch((err) => {
+                console.error("Error occurred trying to copy: ", err);
+              });
+      break;
+    case '#launch':
+      build();
+      launch();
+      break
+  }
+  display.scrollTop = display.scrollHeight;
+}
+
+function launch() {
+}
+
+let alphabet;
+function updateAlphabet() {
+  alphabet = []; // equals to word.clear()
+  let value = document.getElementById('alphabet').value;
+  value.trim();
+  let startParemphasis = value.indexOf('{');
+  value = value.substring(startParemphasis + 1); // get substring without '{'
+  let edge, letter;
+  cycle: {
+    while (true) {
+      edge = value.indexOf(',');
+      if (edge === -1) {
+        edge = value.indexOf('}');
+        letter = value.substring(0, edge);
+        letter = letter.trim();
+        alphabet.push(letter);
+        break cycle;
+      }
+      letter = value.substring(0, edge);
+      letter = letter.trim();
+      alphabet.push(letter);
+      value = value.substring(edge + 1);
+    }
+  }
+}
+
+let word;
+function updateWord() {
+  word = []; // equals to word.clear()
+  let value = document.getElementById('word').value.trim() + '}';
+  let edge, letter;
+  cycle: {
+    while (true) {
+      edge = value.indexOf(',');
+      if (edge === -1) {
+        edge = value.indexOf('}');
+        letter = value.substring(0, edge);
+        letter = letter.trim();
+        word.push(letter);
+        break cycle;
+      }
+      letter = value.substring(0, edge);
+      letter = letter.trim();
+      word.push(letter);
+      value = value.substring(edge + 1);
+    }
+  }
+}
+
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+const matrix = new Map();
+function build() {
+  updateWord();
+  updateAlphabet();
+  try {
+    checkAlphabetEmpty();
+    findDublicatesInAlphabet();
+    checkWordEmpty();
+    findExclusiveLetters();
+    checkEmptyStringInAlphabet();
+    findForbiddenSymbols();
+  } catch (error) {
+    alert('Wrong input: ' + error.message);
+    return;
+  }
+  updateMatrix();
+  updateFirstColumn();
+  fillLentWithWord();
+  printMatrix(); // test
+}
+
+function updateMatrix() {
+  matrix.clear();
+  const letters = document.getElementsByClassName('letter'); // class letter is used in first table column
+  const rowLength = document.getElementsByTagName('th').length - 1; // by decreasing this value by 1 we exclude 'add/erase column' buttons
+  const cells = document.getElementsByClassName('cell');
+
+  let array;
+  let cellIndex = 0;
+  for (let i = 0; i < letters.length; ++i) { // walks through every row
+    //alert('/' + letters.item(i).textContent + '/');
+
+    array = new Array();
+    for (let i = 1; i < rowLength; ++i) { // walks through every cell in a row and collect an array of instructions
+      array.push(cells.item(cellIndex).value);
+      ++cellIndex;
+    }
+    matrix.set(letters.item(i).textContent, array); // bounds a letter with array of instructions
+  }
+}
+
+function copy() {
+  navigator.clipboard.writeText(hash())
+          .then(() => {
+            console.log("Copied to the clipboard!");
+          })
+          .catch((err) => {
+            console.error("Error occurred trying to copy: ", err);
+          });
+}
+
+function hash() {
+  // initial
+  let hash = '~';
+  const table = document.getElementsByTagName('table')[0];
+  const rowLength = table.children.item(0).children.item(0).children.length;
+
+  // Q
+  hash = hash + (rowLength - 2) + 'q~'; // excluding cell with buttons and alphabet column
+  const cells = document.getElementsByClassName('cell');
+
+  // alphabet
+  updateAlphabet();
+  for (let i = 0; i < alphabet.length; ++i) {
+    hash = hash + alphabet[i] + '%';
+  }
+  hash = hash + '~';
+
+  // word
+  updateWord();
+  for (let i = 0; i < word.length; ++i) {
+    hash = hash + word[i] + '%';
+  }
+  hash = hash + '~';
+
+  // cells
+  for (let i = 0; i < cells.length; ++i) {
+    hash = hash + cells.item(i).value + '%';
+  }
+  hash = hash + '~';
+
+  return hash;
+}
+
+function fillLentWithWord() {
+  const lent = document.getElementById('lent');
+  const cells = lent.children;
+  let cell;
+  for (let i = 0; i < word.length; ++i) {
+     cell = cells.item(i);
+     cell.textContent = word[i];
+  }
+}
+
+function printMatrix() { // test only
+  let stringedMatrix, item;
+  stringedMatrix = '';
+  for (let i = 0; i < alphabet.length; ++i) {
+    item = matrix.get(alphabet[i]);
+    stringedMatrix = stringedMatrix + '\n' + `${alphabet[i]}: ` + item;
+  }
+  alert(stringedMatrix);
+}
+</script>
+<script src="help.js"></script>
+<script src="console.js"></script>
+<script src="style.js"></script>
+<script src="table.js"></script>
+</body>
+</html>
