@@ -66,6 +66,9 @@ function eraseColumn() {
     const thead = document.getElementsByTagName('thead')[0];
     let tr = thead.children[0];
     const columns = tr.children;
+    if (columns.length < 3) { //prevents deleting the first column (containing alphabet)
+        return;
+    }
     const toRemove = columns.item(columns.length - 2);
     const tbody = document.getElementsByTagName('tbody').item(0); // access the only one tbody tag on page
     let td;
