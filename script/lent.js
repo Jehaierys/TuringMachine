@@ -1,4 +1,3 @@
-
 function fillLentWithWord() {
     const lent = document.getElementById('lent');
     const cells = lent.children;

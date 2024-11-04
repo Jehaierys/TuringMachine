@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="style/help.css">
   <link rel="stylesheet" href="style/table.css">
   <link rel="stylesheet" href="style/panel.css">
+  <link rel="stylesheet" href="style/lent.css">
   <style>
     body {
       margin: 0;
@@ -30,23 +31,6 @@
     }
     section {
       z-index: 2;
-    }
-    p.lentCell {
-      display: inline-block;
-      margin: 0;
-      border-right: 1px solid #FF4081;
-      height: 25px;
-      width: 40px;
-      font-family: sans-serif;
-      text-align: center;
-      vertical-align: center;
-    }
-    #lent {
-      -ms-overflow-x: scroll;
-      width: 820px;
-      margin-top: 20px;
-      margin-bottom: 40px;
-      overflow: scroll;
     }
   </style>
 </head>
@@ -267,7 +251,6 @@ function build() {
   fillLentWithWord();
   printMatrix(); // test
 }
-
 
 function copy() {
   navigator.clipboard.writeText(hash())

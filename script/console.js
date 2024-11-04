@@ -1,4 +1,3 @@
-
 function checkWordEmpty() {
     if (word.length === 1 && word[0] === '') {
         throw new Error('word is empty');
