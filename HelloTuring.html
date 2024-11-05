@@ -108,10 +108,10 @@
       <ul>
         <li class="rules"><span class="help essential">#</span>, <span class="help essential">~</span>,
           <span class="help essential">></span>, <span class="help essential"><</span>, <span class="help essential">=</span>
-          symbols and <span class="help essential">empty string</span> are <span class="help critical">forbidden</span> as letters or part of it
+          symbols and <span class="help essential">empty string</span> are <span class="help critical">forbidden</span> as letters or its part
         </li>
         <li class="rules">
-          <span class="help essential">comma</span> ( <span class="help essential">,</span> ) may not be a letter or part of it
+          <span class="help essential">comma</span> ( <span class="help essential">,</span> ) may not be a letter or its part
         </li>
         <li class="rules">
           You should write something like <span class="help permitted">{s1, s2, s3, s4}</span>
@@ -245,14 +245,14 @@ function build() {
     alert('Wrong input: ' + error.message);
     return;
   }
-  updateMatrix();
   updateFirstColumn();
+  updateMatrix();
   fillLentWithWord();
   printMatrix(); // test
 }
 
 function copy() {
-  navigator.clipboard.writeText(hash())
+  navigator.clipboard.writeText(token())
           .then(() => {
             console.log("Copied to the clipboard!");
           })

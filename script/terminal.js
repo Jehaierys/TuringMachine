@@ -7,6 +7,7 @@ function addConsoleListener() {
             p.classList.add('terminal');
             p.innerHTML = '<span class="octothrop">#</span>' + console.value;
             display.appendChild(p);
+            console.value = '';
             invokeCommandReader();
         }
     });
@@ -33,22 +34,14 @@ async function invokeCommandReader() {
             help();
             break;
         case '#copy':
-            p = document.createElement('p');
-            p.classList.add('terminal');
-            p.textContent = token()
-            display.appendChild(p);
-            navigator.clipboard.writeText(token())
-                .then(() => {
-                    console.log("Copied to the clipboard!");
-                })
-                .catch((err) => {
-                    console.error("Error occurred trying to copy: ", err);
-                });
+            copy();
             break;
         case '#launch':
             build();
             launch();
-            break
+            break;
+        default:
+            noSuchCommand();
     }
     display.scrollTop = display.scrollHeight;
 }
@@ -67,7 +60,6 @@ function extractModifier(command) {
     if (secondSpace === -1) {
         secondSpace = command.length;
     }
-    //alert('Modifier: "' + command.substring(firstSpace + 1, secondSpace) + '"');
     return command.substring(firstSpace + 1, secondSpace);
 }
 
@@ -123,7 +115,6 @@ function print(modifier) {
     const display = getDisplay();
     let p = paragraph();
     let message;
-    alert(modifier)
     switch (modifier) {
         case '-a':
         case 'alphabet':
@@ -171,8 +162,6 @@ function print(modifier) {
 
 function clear(modifier) {
     const display = getDisplay();
-    let p = paragraph();
-    let message;
     switch (modifier) {
         case '-w':
         case 'word':
@@ -226,6 +215,14 @@ function token() {
     hash = hash + '~';
 
     return hash;
+}
+
+function noSuchCommand() {
+    const display = getDisplay();
+    const p = paragraph();
+    p.textContent = 'no such command';
+    p.classList.add('terminal');
+    display.appendChild(p);
 }
 
 function checkWordEmpty() {
