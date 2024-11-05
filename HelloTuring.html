@@ -42,7 +42,7 @@
     <div class="panel">
       <article class="panel">
         <h3 class="panel" id="labelForWord">Word</h3>
-        <input class="panel" id="word" name="word" type="text" placeholder="s4, s1, s3, s5, s2, s1">
+        <input class="panel" id="word" name="word" type="text" placeholder="s4, s1, s3, s2, s1">
         <br>
         <h3 class="panel" id="labelForAlphabet">Alphabet</h3>
         <input class="panel" id="alphabet" type="text" placeholder="{s1, s2, s3, s4, s5}">
@@ -217,7 +217,6 @@
   </section>
 </main>
 <script> // globals: matrix, alphabet, word \
-
 function forOnload() {
   prepareLent(20);
   addLabelListeners();
@@ -274,7 +273,7 @@ function printMatrix() { // test only
 </script>
 <script src="script/lent.js"></script>
 <script src="script/help.js"></script>
-<script src="script/console.js"></script>
+<script src="script/terminal.js"></script>
 <script src="script/panel_input.js"></script>
 <script src="script/table.js"></script>
 </body>
