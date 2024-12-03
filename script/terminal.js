@@ -217,6 +217,14 @@ function token() {
     return hash;
 }
 
+function reportInTerminal() {
+    const display = getDisplay();
+    const p = paragraph();
+
+    p.textContent = token();
+    display.appendChild(p);
+}
+
 function noSuchCommand() {
     const display = getDisplay();
     const p = paragraph();

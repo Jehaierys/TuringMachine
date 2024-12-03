@@ -26,7 +26,7 @@
       margin-left: 12vw;
       margin-right: 12vw;
       margin-top: 7vh;
-      height: 2000px;
+      height: 1000px;
       z-index: 1;
     }
     section {
@@ -232,9 +232,11 @@ function sleep(ms) {
 
 const matrix = new Map();
 function build() {
-  updateWord();
+
+  updateWord(); // prepare everything
   updateAlphabet();
-  try {
+
+  try { // seek for mistakes
     checkAlphabetEmpty();
     findDublicatesInAlphabet();
     checkWordEmpty();
@@ -245,13 +247,16 @@ function build() {
     alert('Wrong input: ' + error.message);
     return;
   }
-  updateFirstColumn();
+
+  updateFirstColumn(); // do the build itself
   updateMatrix();
   fillLentWithWord();
-  printMatrix(); // test
+
+  printMatrix(); // test using alert
 }
 
 function copy() {
+  reportInTerminal();
   navigator.clipboard.writeText(token())
           .then(() => {
             console.log("Copied to the clipboard!");
