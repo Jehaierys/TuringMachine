@@ -9,6 +9,14 @@ section.help {
     background-color: rgba(18, 18, 18, 0.85);
     height: 500px;
 }
+
+p.terminal {
+    color: #FF4081;
+    font-size: 20px;
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+}
 article.help {
     margin-left: 40px;
     margin-right: 40px;

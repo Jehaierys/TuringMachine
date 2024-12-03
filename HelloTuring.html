@@ -7,9 +7,11 @@
   <link rel="stylesheet" href="style/table.css">
   <link rel="stylesheet" href="style/panel.css">
   <link rel="stylesheet" href="style/lent.css">
+  <link rel="stylesheet" href="style/main-button-holder.css">
   <style>
     body {
       margin: 0;
+      padding: 0;
       height: 100vh;
       width: 100vw;
       border: 0;
@@ -20,14 +22,15 @@
       background-color: #FF4081;
       color: #121212;
     }
-    main {
-      width: 72vw;
-      min-width: 1000px;
-      margin-left: 12vw;
-      margin-right: 12vw;
-      margin-top: 7vh;
-      height: 1000px;
-      z-index: 1;
+    @media (min-width: 1440px) {
+      main {
+        width: 100%;
+        height: 1000px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
     }
     section {
       z-index: 2;
@@ -40,26 +43,28 @@
 
   <section id="panel">
     <div class="panel">
-      <article class="panel">
-        <h3 class="panel" id="labelForWord">Word</h3>
+      <article>
+        <h3 id="labelForWord">Word</h3>
         <input class="panel" id="word" name="word" type="text" placeholder="s4, s1, s3, s2, s1">
         <br>
-        <h3 class="panel" id="labelForAlphabet">Alphabet</h3>
+        <h3 id="labelForAlphabet">Alphabet</h3>
         <input class="panel" id="alphabet" type="text" placeholder="{s1, s2, s3, s4, s5}">
         <div>
           <button id="helpButton" onclick="help()">?</button>
         </div>
       </article>
-      <article class="panel">
+      <article>
         <div id="display"></div>
         <input id="console">
       </article>
     </div>
-    <div id="panelButtonsHolder">
-      <button onclick="build()" type="button" class="panel">Build</button>
-      <button onclick="launch()" class="panel">Launch</button>
-      <button onclick="copy()" class="panel" title="getConfigAndPushInTheClipboard">Copy</button>
-    </div>
+  </section>
+
+
+  <section id="main-button-holder">
+    <button onclick="build()" type="button">Build</button>
+    <button onclick="launch()">Launch</button>
+    <button onclick="copy()" title="getConfigAndPushInTheClipboard">Copy</button>
   </section>
 
   <section id="lent"></section>

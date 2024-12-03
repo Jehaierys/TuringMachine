@@ -1,18 +1,22 @@
-p.lentCell {
-    display: inline-block;
-    margin: 0;
-    border-right: 1px solid #FF4081;
-    height: 25px;
-    width: 40px;
-    font-family: sans-serif;
-    text-align: center;
-    vertical-align: center;
-}
 #lent {
     -ms-overflow-x: scroll;
     overflow-x: scroll;
-    width: 820px;
-    height: 27px;
-    margin-top: 20px;
-    margin-bottom: 40px;
+    border: 2px solid orangered;
+    p.lentCell {
+        display: inline-block;
+        margin: 0;
+        border-right: 1px solid #FF4081;
+        height: 25px;
+        width: 40px;
+        font-family: sans-serif;
+        text-align: center;
+        vertical-align: center;
+    }
+}
+
+@media (min-width: 1440px) {
+    #lent {
+        width: 1440px;
+        height: 50px;
+    }
 }

@@ -1,0 +1,30 @@
+#main-button-holder {
+    display: grid;
+    justify-content: space-evenly;
+    align-content: center;
+    border: 2px solid orangered;
+    button {
+        background-color: #FF4081;
+        color: #E0E0E0;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-family: Verdana, sans-serif;
+        font-size: 40px;
+        font-weight: normal;
+    }
+    button:hover {
+        background-color: #FFFF00;
+        color: #121212;
+    }
+}
+
+@media (min-width: 1440px) {
+    #main-button-holder {
+        width: 1440px;
+        height: 100px;
+        grid-template-columns: repeat(3, 210px);
+        grid-template-rows: 70px;
+    }
+}

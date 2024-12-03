@@ -1,64 +1,61 @@
 #panel {
-    height: 35vh;
-    min-height: 300px;
+    border: 2px solid orangered;
+    div.panel {
+        margin-top: 3vh;
+        display: grid;
+        width: 72vw;
+        grid-template-columns: 30vw 30vw;
+        justify-content: space-evenly;
+        height: 22vh;
+        padding: 0;
+        min-height: 180px;
+        article {
+            min-width: 400px;
+            margin: 0;
+            h3 {
+                display: inline-block;
+                text-align: center;
+                vertical-align: center;
+                width: 6vw;
+                min-width: 100px;
+                font-family: sans-serif;
+            }
+            input.panel {
+                background-color: transparent;
+                color: #FF4081;
+                font-size: 20px;
+                border: 1px solid #FF4081;
+                padding: 10px;
+                border-radius: 5px;
+                transition: border-color 0.3s;
+            }
+            input.panel::placeholder {
+                color: rgba(256, 64, 129, 0.7);
+                font-style: italic;
+            }
+            input.panel:focus {
+                border: 1px solid #FFFF00;
+                color: #FFFF00;
+                outline: none;
+            }
+            input.panel:focus::selection {
+                background-color: #FFFF00;
+                color: #121212;
+            }
+            input.panel:focus::placeholder {
+                color: rgba(255, 255, 0, 0.6);
+            }
+        }
+    }
 }
-div.panel {
-    margin-top: 3vh;
-    display: grid;
-    width: 72vw;
-    min-width: 1000px;
-    grid-template-columns: 30vw 30vw;
-    justify-content: space-evenly;
-    height: 22vh;
-    padding: 0;
-    min-height: 180px;
+
+@media (min-width: 1440px) {
+    #panel {
+        height: 270px;
+        width: 1440px;
+    }
 }
-article.panel {
-    min-width: 400px;
-    margin: 0;
-}
-button.panel {
-    background-color: #FF4081;
-    color: #E0E0E0; /*#121212*/
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-family: Verdana, sans-serif;
-    font-size: 40px;
-    font-weight: normal;
-    width: 210px;
-}
-button.panel:hover {
-    background-color: #FFFF00;
-    color: #121212;
-}
-#panelButtonsHolder {
-    display: grid;
-    grid-template-columns: repeat(3, 250px);
-    justify-content: space-evenly;
-    width: 72vw;
-    min-width: 1000px;
-    margin-top: 40px;
-    margin-bottom: 20px;
-}
-h3.panel {
-    display: inline-block;
-    text-align: center;
-    vertical-align: center;
-    width: 6vw;
-    min-width: 100px;
-    font-family: sans-serif;
-}
-input.panel {
-    background-color: transparent;
-    color: #FF4081;
-    font-size: 20px;
-    border: 1px solid #FF4081;
-    padding: 10px;
-    border-radius: 5px;
-    transition: border-color 0.3s;
-}
+
 #display {
     width: 550px;
     height: 15vh;
@@ -105,32 +102,9 @@ input.panel {
     background-color: #FFFF00;
     color: #121212;
 }
-input.panel::placeholder {
-    color: rgba(256, 64, 129, 0.7);
-    font-style: italic;
-}
-input.panel:focus {
-    border: 1px solid #FFFF00;
-    color: #FFFF00;
-    outline: none;
-}
-input.panel:focus::selection {
-    background-color: #FFFF00;
-    color: #121212;
-}
 #console:focus::selection {
     background-color: #FFFF00;
     color: #121212;
-}
-input.panel:focus::placeholder {
-    color: rgba(255, 255, 0, 0.6);
-}
-p.terminal {
-    color: #FF4081;
-    font-size: 20px;
-    background-color: transparent;
-    margin: 0;
-    padding: 0;
 }
 span.octothrop {
     color: #FF8C00;
