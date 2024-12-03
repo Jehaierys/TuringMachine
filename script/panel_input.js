@@ -43,6 +43,9 @@ function updateAlphabet() {
         }
     }
 }
+function getAlphabetField() {
+    return document.getElementById('alphabet');
+}
 
 let word;
 function updateWord() {
@@ -65,4 +68,7 @@ function updateWord() {
             value = value.substring(edge + 1);
         }
     }
+}
+function getWordField() {
+    return document.getElementById('word');
 }

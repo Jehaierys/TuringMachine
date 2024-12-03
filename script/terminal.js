@@ -28,6 +28,7 @@ async function invokeCommandReader() {
             print(extractModifier(command));
             break;
         case '#build':
+            prebuild(extractModifier(command)); // modifier is token
             build();
             break;
         case '#help':
@@ -46,6 +47,80 @@ async function invokeCommandReader() {
     display.scrollTop = display.scrollHeight;
 }
 
+function prebuild(modifier) { // modifier is token
+    if (modifier === null) {
+        alert('modifier is empty');
+        return;
+    }
+    const token = { value: modifier };
+
+    const q = extractQAndResizeTable(token);
+    extractAlphabet(token);
+    extractWord(token);
+    extractTableSettings(token, q);
+}
+
+function extractQAndResizeTable(token) {
+    const tilda = token.value.indexOf('~');
+    const q = token.value.indexOf('q');
+    const quantity = token.value.substring(tilda + 1, q);
+    token.value = token.value.substring(q + 1); // truncate token
+
+    let currentHeaderLength = document.getElementById('table').children.item(0).children.item(0).children.length - 2; // excluding cells with buttons and title
+    resizeTable(parseInt(currentHeaderLength - quantity));
+
+    return parseInt(quantity);
+}
+
+function resizeTable(i) {
+    if (i > 0) {
+        while (i !== 0) {
+            eraseColumn();
+            --i;
+        }
+    } else {
+        while (i !== 0) {
+            addColumn();
+            ++i;
+        }
+    }
+}
+
+function extractAlphabet(token) {
+    const startTilda = token.value.indexOf( '~',);
+    const endTilda = token.value.indexOf('~', 2);
+    let part = token.value.substring(startTilda + 1, endTilda);
+    token.value = token.value.substring(part.length + 1);
+    let newAlphabet = '{';
+    while (part.includes('%')) {
+        newAlphabet += part.substring(0, part.indexOf('%')) + ', ';
+        part = part.substring(part.indexOf('%') + 1);
+    }
+    newAlphabet += part + '}'; // last iteration
+    getAlphabetField().value = newAlphabet;
+}
+
+function extractWord(token) {
+    let part = token.value.substring(1, token.value.indexOf('~', 2));
+    token.value = token.value.substring(part.length + 1);
+    let newWord = '';
+    while (part.includes('%')) {
+        newWord += part.substring(0, part.indexOf('%')) + ', ';
+        part = part.substring(part.indexOf('%') + 1);
+    }
+    newWord += part;
+    getWordField().value = newWord;
+}
+
+function extractTableSettings(token, q) {
+    token.value = token.value.trim().substring(1, token.value.length - 1); // in the rest remains only table string
+    const arr = token.value.split('%');
+    const cells = document.getElementsByClassName('cell');
+    for (let i = 0; i < cells.length; ++i) {
+        cells.item(i).value = arr[i];
+    }
+}
+
 function getCommandCore(command) {
     if (!command.includes(' ')) {
         return command;
@@ -56,6 +131,9 @@ function getCommandCore(command) {
 
 function extractModifier(command) {
     const firstSpace = command.indexOf(' ');
+    if (firstSpace === -1) {
+        return null;
+    }
     let secondSpace = command.indexOf(' ', firstSpace + 1);
     if (secondSpace === -1) {
         secondSpace = command.length;
@@ -197,22 +275,31 @@ function token() {
     // alphabet
     updateAlphabet();
     for (let i = 0; i < alphabet.length; ++i) {
-        hash = hash + alphabet[i] + '%';
+        if (i < alphabet.length - 1) {  // omit last '%' in alphabet part of token
+            hash += alphabet[i] + '%';
+        } else {
+            hash += alphabet[i] + '~';
+        }
     }
-    hash = hash + '~';
 
     // word
     updateWord();
     for (let i = 0; i < word.length; ++i) {
-        hash = hash + word[i] + '%';
+        if (i < word.length - 1) {
+            hash += word[i] + '%';
+        } else {
+            hash += word[i] + '~';
+        }
     }
-    hash = hash + '~';
 
     // cells
     for (let i = 0; i < cells.length; ++i) {
-        hash = hash + cells.item(i).value + '%';
+        if (i < cells.length - 1) {
+            hash += cells.item(i).value + '%';
+        } else {
+            hash += cells.item(i).value + '~'
+        }
     }
-    hash = hash + '~';
 
     return hash;
 }

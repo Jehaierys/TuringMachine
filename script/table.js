@@ -1,4 +1,4 @@
-function updateFirstColumn() {
+function updateFirstColumn() { // updates Q-row
     const trList = document.getElementsByTagName('tbody')[0].children;
     if (alphabet.length > trList.length) {
         let difference = alphabet.length - trList.length;

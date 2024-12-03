@@ -32,9 +32,6 @@
         align-items: center;
       }
     }
-    section {
-      z-index: 2;
-    }
   </style>
 </head>
 <body onload="forOnload()">
@@ -42,17 +39,14 @@
 <main>
 
   <section id="panel">
-    <article>
+    <article class="input">
       <h3 id="labelForWord">Word</h3>
       <input class="panel" id="word" name="word" type="text" placeholder="s4, s1, s3, s2, s1">
-      <br>
       <h3 id="labelForAlphabet">Alphabet</h3>
       <input class="panel" id="alphabet" type="text" placeholder="{s1, s2, s3, s4, s5}">
-      <div>
-        <button id="helpButton" onclick="help()">?</button>
-      </div>
+      <button id="helpButton" onclick="help()">?</button>
     </article>
-    <article>
+    <article class="console">
       <div id="display"></div>
       <input id="console">
     </article>
@@ -144,7 +138,9 @@
     <table id="table">
     <thead>
     <tr>
-      <th id="headCell">S\Q</th>
+      <th id="headCell">
+        S\Q
+      </th>
       <th>q1</th>
       <th>q2</th>
       <th>q3</th>
@@ -158,7 +154,7 @@
       </th>
     </tr>
     </thead>
-    <tbody>
+    <tbody id="table-body">
     <tr>
       <td class="letter">s1</td>
       <td><input type="text" class="cell"></td>
@@ -250,11 +246,9 @@ function build() {
     alert('Wrong input: ' + error.message);
     return;
   }
-
   updateFirstColumn(); // do the build itself
   updateMatrix();
   fillLentWithWord();
-
   printMatrix(); // test using alert
 }
 

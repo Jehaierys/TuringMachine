@@ -1,5 +1,4 @@
 #panel {
-    border: 2px solid orangered;
     display: grid;
     justify-content: space-evenly;
     align-content: center;
@@ -7,7 +6,15 @@
     article {
         margin: 0;
         padding: 0;
+    }
+    article.input {
+        display: grid;
+        justify-content: center;
+        align-content: center;
+        justify-items: left;
+        align-items: center;
         h3 {
+            margin: 17px 0 7px 0;
             display: inline-grid;
             text-align: center;
             vertical-align: center;
@@ -39,7 +46,85 @@
         input.panel:focus::placeholder {
             color: rgba(255, 255, 0, 0.6);
         }
+        #helpButton {
+            background: linear-gradient(270deg, #FF4500, #FF8C00, #FFD700, #FFD700, #FF8C00, #FF4500);
+            background-size: 400% 400%; /* Увеличиваем размер градиента для анимации */
+            font-size: 30px;
+            font-weight: bold;
+            font-family: sans-serif;
+            width: 48px;
+            height: 48px;
+            border-radius: 24px;
+            outline: none;
+            border: none;
+            animation: gradientAnimation 3s ease infinite;
+            transition: background 1s;
+            margin: 17px 0 0 120px;
+        }
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
     }
+    article.console {
+        display: grid;
+        justify-content: center;
+        align-content: center;
+        #display {
+            width: 550px;
+            height: 170px;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            background-color: transparent;
+            color: #FF4081;
+            outline: none;
+            border: 1px solid #FF4081;
+            margin: 0;
+            padding: 10px;
+            text-align: left;
+            vertical-align: top;
+            font-size: 22px;
+            overflow-x: scroll;
+            -ms-overflow-x: scroll;
+        }
+        #console {
+            width: 550px;
+            height: 35px;
+            min-height: 35px;
+            background-color: transparent;
+            color: #FF4081;
+            outline: none;
+            border: 1px solid #FF4081;
+            margin: 0;
+            padding: 10px;
+            text-align: left;
+            vertical-align: auto;
+            font-size: 25px;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+        #console:hover {
+            border: 2px solid #FF4081;
+        }
+        #console:focus {
+            border: 1px solid #FFFF00;
+            color: #FFFF00;
+        }
+        #console:focus::selection {
+            background-color: #FFFF00;
+            color: #121212;
+        }
+        #console:focus::selection {
+            background-color: #FFFF00;
+            color: #121212;
+        }
+    }
+}
+
+
+#helpButton:hover {
+    animation: gradientAnimation 1s ease infinite;
 }
 
 @media (min-width: 1440px) {
@@ -51,56 +136,6 @@
     }
 }
 
-#display {
-    width: 550px;
-    height: 15vh;
-    min-height: 130px;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    background-color: transparent;
-    color: #FF4081;
-    outline: none;
-    border: 1px solid #FF4081;
-    margin: 0;
-    padding: 10px;
-    text-align: left;
-    vertical-align: top;
-    font-size: 22px;
-    max-height: 22vh;
-    overflow-x: scroll;
-    -ms-overflow-x: scroll;
-}
-#console {
-    width: 550px;
-    height: 3vh;
-    min-height: 35px;
-    background-color: transparent;
-    color: #FF4081;
-    outline: none;
-    border: 1px solid #FF4081;
-    margin: 0;
-    padding: 10px;
-    text-align: left;
-    vertical-align: auto;
-    font-size: 25px;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-#console:hover {
-    border: 2px solid #FF4081;
-}
-#console:focus {
-    border: 1px solid #FFFF00;
-    color: #FFFF00;
-}
-#console:focus::selection {
-    background-color: #FFFF00;
-    color: #121212;
-}
-#console:focus::selection {
-    background-color: #FFFF00;
-    color: #121212;
-}
 span.octothrop {
     color: #FF8C00;
 }
