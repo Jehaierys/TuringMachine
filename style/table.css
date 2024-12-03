@@ -1,9 +1,9 @@
 section.table {
+    border: 2px solid orangered;
     display: flex;
     align-items: center;
     justify-content: space-around;
     overflow: auto;
-    min-width: 1000px;
     table {
         border-collapse: collapse;
         tr {
@@ -83,5 +83,11 @@ section.table {
             background-color: #FFFF00;
             color: #121212;
         }
+    }
+}
+
+@media (min-width: 1440px) {
+    section.table {
+        width: 1440px;
     }
 }

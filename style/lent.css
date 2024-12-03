@@ -1,7 +1,6 @@
 #lent {
     -ms-overflow-x: scroll;
     overflow-x: scroll;
-    border: 2px solid orangered;
     p.lentCell {
         display: inline-block;
         margin: 0;
