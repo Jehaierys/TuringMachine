@@ -85,13 +85,20 @@
             font-size: 22px;
             overflow-x: scroll;
             -ms-overflow-x: scroll;
-            span.octothrop {
-                color: #FF8C00;
+            p.terminal {
+                color: #FF4081;
+                font-size: 20px;
+                background-color: transparent;
+                margin: 0;
+                padding: 0;
+                span.octothrop {
+                    color: #FF8C00;
+                }
+                span.octothrop::selection {
+                    color: #121212;
+                    background-color: #FF8C00;
+                }
             }
-            span.octothrop::selection {
-                color: #121212;
-                background-color: #FF8C00;
-             }
         }
         #console {
             width: 550px;
