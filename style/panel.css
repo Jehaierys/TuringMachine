@@ -57,14 +57,12 @@
             border-radius: 24px;
             outline: none;
             border: none;
-            animation: gradientAnimation 3s ease infinite;
+            animation: gradientAnimation 6s ease infinite;
             transition: background 1s;
             margin: 17px 0 0 120px;
         }
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        #helpButton:hover {
+            animation: gradientAnimation 1s ease infinite;
         }
     }
     article.console {
@@ -87,6 +85,13 @@
             font-size: 22px;
             overflow-x: scroll;
             -ms-overflow-x: scroll;
+            span.octothrop {
+                color: #FF8C00;
+            }
+            span.octothrop::selection {
+                color: #121212;
+                background-color: #FF8C00;
+             }
         }
         #console {
             width: 550px;
@@ -122,9 +127,10 @@
     }
 }
 
-
-#helpButton:hover {
-    animation: gradientAnimation 1s ease infinite;
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 @media (min-width: 1440px) {
@@ -136,6 +142,3 @@
     }
 }
 
-span.octothrop {
-    color: #FF8C00;
-}
