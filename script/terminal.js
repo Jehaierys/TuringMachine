@@ -3,9 +3,15 @@ function addConsoleListener() {
     console.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
             const display = getDisplay();
-            let p = document.createElement('p');
+            const p = document.createElement('p');
+            const octothrop = document.createElement('span');
+            const text = document.createElement('span');
+            text.textContent = console.value;
+            octothrop.textContent = '#';
+            octothrop.classList.add('octothrop');
+            p.appendChild(octothrop);
+            p.appendChild(text);
             p.classList.add('terminal');
-            p.innerHTML = '<span class="octothrop">#</span>' + console.value;
             display.appendChild(p);
             console.value = '';
             invokeCommandReader();
