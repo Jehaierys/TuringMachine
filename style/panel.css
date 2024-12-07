@@ -75,6 +75,7 @@
             border-top-left-radius: 15px;
             border-top-right-radius: 15px;
             background-color: transparent;
+            word-break: break-all;
             color: #FF4081;
             outline: none;
             border: 1px solid #FF4081;
