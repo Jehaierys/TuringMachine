@@ -59,6 +59,7 @@
     <button onclick="copy()" title="Put token in your clipboard">Copy</button>
   </section>
 
+  <!-- function from lent.js fills this section with cells -->
   <section id="lent"></section>
 
   <section id="help" class="help">
@@ -217,13 +218,12 @@
 </main>
 <script> // globals: matrix, alphabet, word \
 function forOnload() {
-  prepareLent(20);
+  fillLentWithCells(20);
   addLabelListeners();
   addConsoleListener();
 }
 
-function launch() {
-}
+// const launcher = new Launcher();
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -247,7 +247,7 @@ function build() {
   }
   updateFirstColumn(); // do the build itself
   updateMatrix();
-  fillLentWithWord();
+  fillLentWithLetters();
   printMatrix(); // test using alert
 }
 
@@ -271,8 +271,9 @@ function printMatrix() { // test only
   }
   alert(stringedMatrix);
 }
+
 </script>
-<script src="script/lent.js"></script>
+<script src="script/Launcher.js"></script>
 <script src="script/help.js"></script>
 <script src="script/terminal.js"></script>
 <script src="script/panel_input.js"></script>

@@ -18,6 +18,10 @@ function addLabelListeners() {
     });
 }
 
+/*
+    takes value from input and
+    interprete it as new alphabet
+*/
 let alphabet;
 function updateAlphabet() {
     alphabet = []; // equals to word.clear()

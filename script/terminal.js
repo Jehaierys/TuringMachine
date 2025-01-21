@@ -45,7 +45,7 @@ async function invokeCommandReader() {
             break;
         case '#launch':
             build();
-            launch();
+            await launch();
             break;
         default:
             noSuchCommand();

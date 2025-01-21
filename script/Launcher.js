@@ -21,15 +21,12 @@ function fillLentWithCells(quantity) {
     }
 }
 
-class Lent {
-    constructor() {
-        this.map = new Map();
-    }
-}
-
-/*
-    Launches the main process
- */
+// class Launcher {
+//     constructor() {
+//
+//     }
+//
+// }
 
 async function launch() {
     const lent = new Map();
@@ -44,26 +41,43 @@ async function launch() {
         ++lentLength;
     }
     // alert(lent.forEach((elem, i) => alert('"' + elem + '"' + ' ' + i)));
-    let currentIndex = 0; // @todo
-    let currentLetter = lent.get(currentIndex);
-    let currentRecord = getAssociatedRecord(currentLetter, 1);
-    alert('initial record:' + currentRecord);
-    let currentCondition = extractConditionFrom(currentRecord);
-
-    currentLetter = extractLetterFrom(currentRecord);
-    updateCell(currentLetter, currentIndex);
+    let index = 0; // @todo
+    let currentLetter = lent.get(index);
+    let record = getAssociatedRecord(currentLetter, 'q1');
+    alert('initial record:' + record);
+    let letterToWriteIn;
+    let currentCondition = extractConditionFrom(record);
 
     let shouldWeDoAnotherIteration = true;
+
     do {
         try {
-            await sleep(4000).then(r => alert('Слава Гитлеру!'));
+            await sleep(3000).then(r => alert('Слава Гитлеру!'));
         } catch (e) {
             alert(e + 'catch section');
         }
-        currentLetter = extractLetterFrom(currentRecord);
-        currentIndex = nextCondition(currentIndex, currentRecord);
-        currentCondition = extractConditionFrom(currentRecord);
-        updateCell(currentLetter, currentIndex);
+        // save initial cell's value to search for next record
+        alert('current letter : "' + lent.get(index) + '"');
+        currentLetter = lent.get(index);
+
+        // extract new letter and write it into the cell
+        letterToWriteIn = extractLetterFrom(record);
+        alert('Letter to write in: "' + letterToWriteIn + '"');
+        updateCell(letterToWriteIn, index);
+        lent.set(index, letterToWriteIn);
+
+        // switch to the next position
+        index = nextPosition(index, record);
+        alert('Next position: ' + index + '"');
+
+        // extract and update current condition
+        currentCondition = extractConditionFrom(record);
+        alert('Current condition: "' + currentCondition + '"');
+
+        // update record by former letter and new condition
+        record = getAssociatedRecord(currentLetter, currentCondition);
+        alert('New record: "' + record + '"');
+
         alert('next iteration is coming');
     } while (shouldWeDoAnotherIteration);
 }
@@ -83,15 +97,15 @@ function updateCell(newLetter, index) {
     cell.textContent = newLetter;
 }
 
-function nextCondition(currentIndex, record) {
+function nextPosition(index, record) {
     const moveSymbol = extractMoveSymbolFrom(record);
     switch (moveSymbol) {
         case '>':
-            return ++currentIndex;
+            return ++index;
         case '<':
-            return --currentIndex;
+            return --index;
         case '=':
-            return currentIndex;
+            return index;
         default:
             throw new Error("No move symbol found by nextCondition() method");
     }
@@ -115,13 +129,13 @@ function getMoveSymbolIndex(record) {
     throw new Error('No move symbol found');
 }
 
-
 /*
     @param letter is one of alphabet letters
     @param condition is number, matches Q-row value without 'q'
     Pulls specified record from the matrix
     @returns string of record
  */
-function getAssociatedRecord(letter, condition) {
-    return matrix.get(letter)[--condition];
+function getAssociatedRecord(letter, q) {
+    q = parseInt(q.substring(1));
+    return matrix.get(letter)[--q];
 }
