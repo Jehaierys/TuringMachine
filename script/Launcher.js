@@ -44,7 +44,7 @@ async function launch() {
     let index = 0; // @todo
     let currentLetter = lent.get(index);
     let record = getAssociatedRecord(currentLetter, 'q1');
-    alert('initial record:' + record);
+    // alert('initial record:' + record);
     let letterToWriteIn;
     let currentCondition = extractConditionFrom(record);
 
@@ -52,38 +52,39 @@ async function launch() {
 
     do {
         try {
-            await sleep(3000).then(r => alert('Слава Гитлеру!'));
+            await sleep(1000).then(r => {});
         } catch (e) {
             alert(e + 'catch section');
         }
-        // save initial cell's value to search for next record
-        alert('current letter : "' + lent.get(index) + '"');
-        currentLetter = lent.get(index);
 
         // extract new letter and write it into the cell
         letterToWriteIn = extractLetterFrom(record);
-        alert('Letter to write in: "' + letterToWriteIn + '"');
+        // alert('Letter to write in: "' + letterToWriteIn + '"');
         updateCell(letterToWriteIn, index);
         lent.set(index, letterToWriteIn);
 
         // switch to the next position
         index = nextPosition(index, record);
-        alert('Next position: ' + index + '"');
+        // alert('Next position: ' + index + '"');
+
+        // save initial cell's value to search for next record
+        // alert('current letter : "' + lent.get(index) + '"');
+        currentLetter = lent.get(index);
 
         // extract and update current condition
         currentCondition = extractConditionFrom(record);
-        alert('Current condition: "' + currentCondition + '"');
+        // alert('Current condition: "' + currentCondition + '"');
 
         // update record by former letter and new condition
         record = getAssociatedRecord(currentLetter, currentCondition);
-        alert('New record: "' + record + '"');
+        // alert('New record: "' + record + '"');
 
-        alert('next iteration is coming');
+        // alert('next iteration is coming');
     } while (shouldWeDoAnotherIteration);
 }
 
 function extractMoveSymbolFrom(record) {
-    alert('extractMoveSymbolFrom log: ' + record.charAt(getMoveSymbolIndex(record)));
+    // alert('extractMoveSymbolFrom log: ' + record.charAt(getMoveSymbolIndex(record)));
     return record.charAt(getMoveSymbolIndex(record));
 }
 
